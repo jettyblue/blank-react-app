@@ -23,9 +23,9 @@ export default function Form(props) {
   return (
     <form className='form container' onSubmit={onSubmit}>
       <div className='form-group submit'>
-        <h4>Click submit to add new member</h4>
+        {/* <h4>Click submit to add new member</h4>
 
-        <button disabled={disabled}>submit</button>
+        <button disabled={disabled}>submit</button> */}
 
         <div className='errors'>
           <div>{errors.first_name}</div>
@@ -37,7 +37,7 @@ export default function Form(props) {
 
 
       <div className='form-group inputs'>
-        <h4>New Member Registration</h4>
+        <h3>New Member Registration</h3>
 
         <label>First Name:
           <input
@@ -48,6 +48,8 @@ export default function Form(props) {
           />
         </label>
 
+        <br></br>
+
         <label>Last Name:
           <input
             value={values.last_name}
@@ -57,6 +59,8 @@ export default function Form(props) {
           />
         </label>
 
+        <br></br>
+
         <label>Email:
           <input
             value={values.email}
@@ -65,6 +69,8 @@ export default function Form(props) {
             type='text'
           />
         </label>
+
+        <br></br>
 
         <label>Password:
           <input
@@ -78,7 +84,7 @@ export default function Form(props) {
 
 
       <div className='form-group checkboxes'>
-        <h4>Our Terms of Service</h4>
+        <h3>Our Terms of Service</h3>
 
         <label>I have read and accept the Terms of Service
           <input
@@ -88,6 +94,10 @@ export default function Form(props) {
             onChange={onChange}
           />
         </label>
+      </div>
+
+      <div>
+        <button disabled={disabled}>Create Account</button>
       </div>
     </form>
   )

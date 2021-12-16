@@ -72,6 +72,7 @@ export default function App() {
       last_name: formValues.last_name.trim(),
       email: formValues.email.trim(),
       password: formValues.password.trim(),
+      termsOfService: false
     }
 
     postNewMember(newMember);

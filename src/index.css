@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin-left: 2%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,24 +12,45 @@ code {
     monospace;
 }
 
+
 h1 {
   color: rgb(69, 58, 58);
 }
 
-h2 {
-  color: rgb(69, 58, 58);
-  color: red;
-}
-
 h3 {
-  color: red;
-  text-underline-position: below;
+  color: rgb(69, 58, 58);
+  margin: 1.5% 0;
 }
 
 h4 {
   color: darkred;
+  margin: 1% 0;
 }
 
 p {
   color: rgb(69, 58, 58);
+  margin: 1% 0;
+  font-size: 0.85rem;
+}
+
+label {
+  color: rgb(69, 58, 58);
+  padding: 0 1.5%;
+  font-size: 0.85rem;
+}
+
+input {
+  margin-left: 0.5%;
+  margin-bottom: 1%;
+  align-items: right;
+}
+
+button {
+  margin: 3% 1.5%;
+}
+
+button:active {
+  background-color: slategrey;
+  color: white;
+  border-radius: 3px;
 }
