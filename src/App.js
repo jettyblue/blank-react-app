@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Form from './Form';
+import Member from './Member';
 
 import axios from 'axios';
 import * as yup from 'yup';
 import schema from './formSchema';
 
 
-//////////////// INITIAL STATES ////////////////
-//////////////// INITIAL STATES ////////////////
-//////////////// INITIAL STATES ////////////////
 const initialFormValues = {
-  ///// TEXT INPUTS /////
   first_name: '',
   last_name: '',
   email: '',
   password: '',
-  ///// CHECKBOXES /////
   termsOfService: false,
 }
 
@@ -28,36 +24,29 @@ const initialFormErrors = {
   termsOfService: '',
 
 }
-const initialFriends = []
+const initialMembers = []
 const initialDisabled = true
 
 
 export default function App() {
-  //////////////// STATES ////////////////
-  const [friends, setFriends] = useState(initialFriends)          // array of friend objects
-  const [formValues, setFormValues] = useState(initialFormValues) // object
-  const [formErrors, setFormErrors] = useState(initialFormErrors) // object
-  const [disabled, setDisabled] = useState(initialDisabled)       // boolean
 
-  //////////////// HELPERS ////////////////
-  //////////////// HELPERS ////////////////
-  //////////////// HELPERS ////////////////
-  const getFriends = () => {
-    // 🔥 STEP 5- IMPLEMENT! ON SUCCESS PUT FRIENDS IN STATE
-    //    helper to [GET] all friends from `http://buddies.com/api/friends`
-    axios.get('http://buddies.com/api/friends')
+  const [members, setMembers] = useState(initialMembers)
+  const [formValues, setFormValues] = useState(initialFormValues)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
+
+  const getMembers = () => {
+
+    axios.get('https://reqres.in/api/users')
       .then(resp => {
-        setFriends(resp.data);
+        setMembers(resp.data.data);
       }).catch(err => console.error(err))
   }
 
-  const postNewFriend = newFriend => {
-    // 🔥 STEP 6- IMPLEMENT! ON SUCCESS ADD NEWLY CREATED FRIEND TO STATE
-    //    helper to [POST] `newFriend` to `http://buddies.com/api/friends`
-    //    and regardless of success or failure, the form should reset
-    axios.post('http://buddies.com/api/friends', newFriend)
+  const postNewMember = newMember => {
+    axios.post('https://reqres.in/api/users', newMember)
       .then(resp => {
-        setFriends([ resp.data, ...friends ]);
+        setMembers([ resp.data.data, ...members ]);
       }).catch(err => console.error(err))
       .finally(() => setFormValues(initialFormValues))
   }
@@ -69,66 +58,39 @@ export default function App() {
       .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }))
   }
 
-  //////////////// EVENT HANDLERS ////////////////
-  //////////////// EVENT HANDLERS ////////////////
-  //////////////// EVENT HANDLERS ////////////////
   const inputChange = (name, value) => {
-    // 🔥 STEP 10- RUN VALIDATION WITH YUP
     validate(name, value);
     setFormValues({
       ...formValues,
-      [name]: value // NOT AN ARRAY
+      [name]: value
     })
   }
 
   const formSubmit = () => {
-    const newFriend = {
-      username: formValues.username.trim(),
+    const newMember = {
+      first_name: formValues.first_name.trim(),
+      last_name: formValues.last_name.trim(),
       email: formValues.email.trim(),
-      role: formValues.role.trim(),
-      civil: formValues.civil.trim(),
-      // 🔥 STEP 7- WHAT ABOUT HOBBIES?
-      hobbies: ['hiking', 'reading', 'coding'].filter(hobby => !!formValues[hobby])
+      password: formValues.password.trim(),
     }
-    // 🔥 STEP 8- POST NEW FRIEND USING HELPER
-    postNewFriend(newFriend);
+
+    postNewMember(newMember);
   }
 
-  /**
-   * const hobbies = ['hiking', 'reading', 'coding']
-   * for (let i = 0; i < hobbies.length; i++) {
-   *   if (formValues[hobbies[i]]) {
-   * }
-   * }
-   */
-
-  /**
-   * const name = "Casey";
-   * console.log(!name) => false
-   * const bool = !name => bool === false
-   * console.log(!bool) => true!
-   * console.log(!!name) => true
-   * const uhOh = "";
-   * console.log(!!uhOh) => false
-   */
-
-  //////////////// SIDE EFFECTS ////////////////
-  //////////////// SIDE EFFECTS ////////////////
-  //////////////// SIDE EFFECTS ////////////////
   useEffect(() => {
-    getFriends()
+    getMembers()
   }, [])
 
   useEffect(() => {
     schema.isValid(formValues).then(valid => setDisabled(!valid))
   }, [formValues])
   
-
+  
   return (
     <div className='container'>
-      <header><h1>Friends App</h1></header>
+      <header><h1>Onboard Members App</h1></header>
 
-      <FriendForm
+      <Form
         values={formValues}
         change={inputChange}
         submit={formSubmit}
@@ -136,10 +98,11 @@ export default function App() {
         errors={formErrors}
       />
 
+      <h3>Current Members</h3>
       {
-        friends.map(friend => {
+        members.map(members => {
           return (
-            <Friend key={friend.id} details={friend} />
+            <Member key={members.id} details={members} />
           )
         })
       }

@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 {
+  color: rgb(69, 58, 58);
+}
+
+h2 {
+  color: rgb(69, 58, 58);
+  color: red;
+}
+
+h3 {
+  color: red;
+  text-underline-position: below;
+}
+
+h4 {
+  color: darkred;
+}
+
+p {
+  color: rgb(69, 58, 58);
+}
