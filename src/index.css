@@ -19,7 +19,7 @@ h1 {
 
 h3 {
   color: rgb(69, 58, 58);
-  margin: 1.5% 0;
+  margin: 5% 0;
 }
 
 h4 {
@@ -33,16 +33,21 @@ p {
   font-size: 0.85rem;
 }
 
+form {
+  display: table;
+}
+
 label {
   color: rgb(69, 58, 58);
   padding: 0 1.5%;
   font-size: 0.85rem;
+  display: table-cell;
 }
 
 input {
   margin-left: 0.5%;
-  margin-bottom: 1%;
   align-items: right;
+  display: table-cell;
 }
 
 button {
@@ -53,4 +58,8 @@ button:active {
   background-color: slategrey;
   color: white;
   border-radius: 3px;
+}
+
+div.form-group {
+  line-height: 16px;
 }
