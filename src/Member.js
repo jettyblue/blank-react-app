@@ -11,6 +11,7 @@ function Member({ details }) {
       <p>Last Name: {details.last_name}</p>
       <p>Email: {details.email}</p>
       <p>Password: {details.password}</p>
+      <br></br>
     </div>
   )
 }

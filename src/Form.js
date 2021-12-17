@@ -97,7 +97,7 @@ export default function Form(props) {
       </div>
 
       <div>
-        <button disabled={disabled}>Create Account</button>
+        <button id='submitBtn' disabled={disabled}>Create Account</button>
       </div>
     </form>
   )
